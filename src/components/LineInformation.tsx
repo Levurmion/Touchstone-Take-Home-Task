@@ -1,6 +1,6 @@
 "use client";
 
-import fetchTflLine from "@/lib/api-hooks/useFetchTflLine/fetchTflLine";
+import fetchTflLine from "@/lib/api-hooks/fetchTflLine/fetchTflLine";
 import { TubeLineStatusContext } from "@/lib/contexts/TubeLineStatusContext";
 import { useState } from "react";
 import useSWR from "swr";
