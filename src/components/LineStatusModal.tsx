@@ -3,10 +3,21 @@
 import { useTubeLineStatusContext } from "@/lib/contexts/TubeLineStatusContext";
 import { tubeLineColors } from "@/lib/utils";
 import CloseIcon from "@mui/icons-material/Close";
+import { useEffect } from "react";
 
 export default function LineStatusModal({ lineId, closeModalCb }: { lineId: string; closeModalCb: () => void }) {
     const tubeLineStatusContext = useTubeLineStatusContext();
     const selectedLine = tubeLineStatusContext?.find((lineInfo) => lineInfo.id === lineId);
+
+    useEffect(() => {
+        if (selectedLine) {
+            document.body.style.overflowY = "hidden"; // lock scrolling
+        }
+
+        return () => {
+            document.body.style.overflowY = "";
+        };
+    }, [lineId]);
 
     if (selectedLine) {
         const lineColor = tubeLineColors[lineId];
@@ -27,9 +38,17 @@ export default function LineStatusModal({ lineId, closeModalCb }: { lineId: stri
                     {lineStatuses?.map((lineStatus) => {
                         const { disruption } = lineStatus;
                         if (disruption) {
-                            return <p className="text-xl" key={lineStatus.statusSeverity}>{disruption.description}</p>;
+                            return (
+                                <p className="text-xl" key={lineStatus.statusSeverity}>
+                                    {disruption.description}
+                                </p>
+                            );
                         } else {
-                            return <p className="text-xl" key={lineStatus.statusSeverity}>{lineStatus.statusSeverityDescription}</p>;
+                            return (
+                                <p className="text-xl" key={lineStatus.statusSeverity}>
+                                    {lineStatus.statusSeverityDescription}
+                                </p>
+                            );
                         }
                     })}
                 </dialog>

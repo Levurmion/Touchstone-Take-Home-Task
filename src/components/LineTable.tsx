@@ -51,12 +51,12 @@ export function StatusList({
     lineStatuses: TflLineStatuses | undefined;
 }) {
     return (
-        <ol>
+        <ul>
             {lineStatuses?.map((lineStatus) => {
                 const { statusSeverityDescription, statusSeverity } = lineStatus;
                 const key = `${lineId}:${statusSeverity}`;
                 return <li key={key}>{statusSeverityDescription}</li>;
             })}
-        </ol>
+        </ul>
     );
 }
