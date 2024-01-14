@@ -1,8 +1,8 @@
 import { tflTransportModes, tflTubeLineStatusKeys } from "./fixtures";
-import useFetchTflLine, { generateQueryParams, replacePathParams } from "./useFetchTflLine";
+import fetchTflLine, { generateQueryParams, replacePathParams } from "./fetchTflLine";
 
 
-describe("useFetchTflLine Hook Testing Suite", () => {
+describe("fetchTflLine Hook Testing Suite", () => {
     test("replacePathParams substitutes path params", () => {
         const urlParams = replacePathParams("/{ids}/Arrivals/{stopPointId}", {
             ids: "victoria",
@@ -22,13 +22,13 @@ describe("useFetchTflLine Hook Testing Suite", () => {
         );
     });
 
-    test("useFetchTflLine can fetch transport modes", async () => {
-        const response = await useFetchTflLine("/Meta/Modes");
+    test("fetchTflLine can fetch transport modes", async () => {
+        const response = await fetchTflLine("/Meta/Modes");
         expect(response).toEqual(tflTransportModes);
     });
 
-    test("useFetchTflLine can fetch tube lines status", async () => {
-        const response = await useFetchTflLine("/Mode/{modes}/Status", {
+    test("fetchTflLine can fetch tube lines status", async () => {
+        const response = await fetchTflLine("/Mode/{modes}/Status", {
             modes: "tube",
         });
         for (const lineStatus of response as any) {

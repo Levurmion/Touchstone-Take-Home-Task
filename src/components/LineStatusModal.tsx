@@ -27,9 +27,9 @@ export default function LineStatusModal({ lineId, closeModalCb }: { lineId: stri
                     {lineStatuses?.map((lineStatus) => {
                         const { disruption } = lineStatus;
                         if (disruption) {
-                            return <p className="text-xl">{disruption.description}</p>;
+                            return <p className="text-xl" key={lineStatus.statusSeverity}>{disruption.description}</p>;
                         } else {
-                            return <p className="text-xl">{lineStatus.statusSeverityDescription}</p>;
+                            return <p className="text-xl" key={lineStatus.statusSeverity}>{lineStatus.statusSeverityDescription}</p>;
                         }
                     })}
                 </dialog>

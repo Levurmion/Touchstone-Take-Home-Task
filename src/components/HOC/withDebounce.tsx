@@ -6,7 +6,7 @@ interface DebouncedInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export default function withDebounce(WrappedInput: InputComponentType) {
-    return (props: DebouncedInputProps) => {
+    return function DebouncedInput (props: DebouncedInputProps) {
         const prevChange = useRef<null | ReturnType<typeof setTimeout>>(null);
 
         const { setChangeCb, ...inputProps } = props;

@@ -46,8 +46,8 @@ export function generateQueryParams(queryParams: { [queryParamName: string]: str
     return new URLSearchParams(queryParamsWithApiKey).toString();
 }
 
-// useFetchTflLine HOOK
-export default async function useFetchTflLine<P extends TflLinePaths>(
+// fetchTflLine HOOK
+export default async function fetchTflLine<P extends TflLinePaths>(
     path: P,
     pathParams?: PathParams<P>,
     queryParams?: QueryParams<P>

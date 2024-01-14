@@ -1,6 +1,6 @@
 "use client";
 
-import useFetchTflLine from "@/lib/api-hooks/useFetchTflLine/useFetchTflLine";
+import fetchTflLine from "@/lib/api-hooks/useFetchTflLine/fetchTflLine";
 import { TubeLineStatusContext } from "@/lib/contexts/TubeLineStatusContext";
 import { useState } from "react";
 import useSWR from "swr";
@@ -16,7 +16,7 @@ export default function LineInformation() {
     const { data, isLoading, error } = useSWR(
         "tube",
         (mode) => {
-            return useFetchTflLine("/Mode/{modes}/Status", { modes: mode });
+            return fetchTflLine("/Mode/{modes}/Status", { modes: mode });
         },
         {
             refreshInterval: 60000,
