@@ -33,14 +33,17 @@ export default function LineInformation() {
         setSelectedLineId(id ?? null);
     };
 
+    const handleCloseModal = () => {
+        setSelectedLineId(null)
+    }
+
     return (
         <TubeLineStatusContext.Provider value={data ?? null}>
             {selectedLineId !== null && (
                 <LineStatusModal
                     lineId={selectedLineId}
-                    closeModalCb={() => {
-                        setSelectedLineId(null);
-                    }}
+                    isOpen={typeof selectedLineId === "string"}
+                    closeModalCb={handleCloseModal}
                 />
             )}
             <section className="flex flex-col gap-2 items-center w-full h-fit">
