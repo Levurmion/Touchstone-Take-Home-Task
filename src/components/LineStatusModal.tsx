@@ -5,32 +5,26 @@ import { tubeLineColors } from "@/lib/utils";
 import CloseIcon from "@mui/icons-material/Close";
 import { useEffect, useRef } from "react";
 
-export default function LineStatusModal({ lineId, isOpen, closeModalCb }: { lineId: string; isOpen: boolean, closeModalCb: () => void}) {
+export default function LineStatusModal({ lineId, closeModalCb }: { lineId: string | null, closeModalCb: () => void}) {
     const tubeLineStatusContext = useTubeLineStatusContext();
     const selectedLine = tubeLineStatusContext?.find((lineInfo) => lineInfo.id === lineId);
     const modalRef = useRef<null | HTMLDialogElement>(null)
 
     useEffect(() => {
-        if (selectedLine) {
-            document.body.style.overflow = "hidden"; // lock scrolling
+        if (modalRef.current) {
+            modalRef.current.showModal()
         }
+        document.body.style.overflow = "hidden"; // lock scrolling
 
         return () => {
-            document.body.style.overflow = "";
-        };
-    }, [lineId]);
-
-    useEffect(() => {
-        if (modalRef.current) {
-            if (isOpen) {
-                modalRef.current.showModal()
-            } else if (!isOpen) {
+            if (modalRef.current) {
                 modalRef.current.close()
             }
-        }
-    }, [isOpen])
+            document.body.style.overflow = "";
+        };
+    }, [lineId])
 
-    const lineColor = tubeLineColors[lineId];
+    const lineColor = lineId !== null ? tubeLineColors[lineId] : null;
     const name = selectedLine?.name
     const lineStatuses = selectedLine?.lineStatuses
 
